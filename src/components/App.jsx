@@ -60,7 +60,7 @@ export class App extends Component {
 
 
   render() {
-    const {images, loading } = this.state;
+    const {loading } = this.state;
     return (
     <Layout>
         <Searchbar onSubmit={ this.handlerFormSubmit} />
