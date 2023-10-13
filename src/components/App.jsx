@@ -1,27 +1,31 @@
 import {Component} from "react";
 import { Searchbar } from "./Searchbar/Searchbar";
 import {ImageGallery} from "./ImageGallery/ImageGallery"
-import {ButtonLoadMore} from "./ButtonLoadMore/ButtonLoadMore"
+//import {ButtonLoadMore} from "./ButtonLoadMore/ButtonLoadMore"
 //import {fetchImages} from "./api"
-import { Audio } from 'react-loader-spinner'
+// import { Audio } from 'react-loader-spinner'
 import { Layout } from "./Layout";
 
 
 export class App extends Component {
   state = {
     images: [],
-    loading: false,
+    
     error: false,
-    q: '', // те по чому я роблю запит
+    searchText: '',// те по чому я роблю запит
     page:1,
   }
   
-  handlerFormSubmit = data => {
-    console.log(data)
-    this.setState({
-      images: data.images,
-      q: data.q,})
+
+  handelSearch = (searchText) => {
+    this.setState({searchText})
   }
+  // handlerFormSubmit = data => {
+  //   console.log(data)
+  //   this.setState({
+  //     images: data.images,
+  //     q: data.q,})
+  // }
   
   
   // async componentDidMount() {
@@ -54,17 +58,18 @@ export class App extends Component {
      
   //}
 
-  handlerLoadMore = () => {
-    this.setState(prevState => prevState +1)
-  }
+  // handlerLoadMore = () => {
+  //   this.setState(prevState => prevState +1)
+  // }
 
 
   render() {
-    const {loading } = this.state;
+    
     return (
-    <Layout>
-        <Searchbar onSubmit={ this.handlerFormSubmit} />
-     {loading && <Audio
+      <Layout>
+        <Searchbar handelSearch={this.handelSearch} />
+        {/* <Searchbar onSubmit={ this.handlerFormSubmit} /> */}
+     {/* {loading && <Audio
   height="80"
   width="80"
   radius="9"
@@ -72,10 +77,11 @@ export class App extends Component {
   ariaLabel="loading"
   wrapperStyle
   wrapperClass
-/>} 
+/>}  */}
         {/* {this.state.images.length > 0 && <ImageGallery gallery={images} />}  */}
-        <ImageGallery gallery={ this.state.images} />
-      <ButtonLoadMore onClick = {this.handlerLoadMore} />
+        {/* <ImageGallery gallery={ this.state.images} /> */}
+        <ImageGallery searchText ={this.state.searchText} />
+      {/* <ButtonLoadMore onClick = {this.handlerLoadMore} /> */}
       {/* <Modal/> */}
     </Layout>
   );

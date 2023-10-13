@@ -1,43 +1,40 @@
 import { Component } from 'react';
-import {fetchImages} from "../api"
 
 export class Searchbar extends Component {
     state = {
-        q: '',
-        images: []
+        value: '',
     }
+
     handlerChange = evt => {
-        this.setState({ q: evt.target.value });
-       
+        this.setState({ value: evt.target.value });
     }
     
     handlerSubmit = evt => {
-    evt.preventDefault();
-    //this.setState({ q: evt.target.value});
-        this.props.onSubmit(this.state)
-
+        evt.preventDefault();
+        this.props.handelSearch(this.state.value)
+        
         this.reset(); 
     }
     
     reset = () => {
-        this.setState({ q:'',})
+        this.setState({ value:'',})
     }
 
-    async componentDidUpdate(prevProps, prevState) {
-        if (prevState.q !== this.state.q
-            || prevState.page !== this.state.page) {
-            //запит з setState
-            try {
-                this.setState({ loading: true });
-                const galleryImages = await fetchImages();
+    // async componentDidUpdate(prevProps, prevState) {
+    //     if (prevState.q !== this.state.q
+    //         || prevState.page !== this.state.page) {
+    //         //запит з setState
+    //         try {
+    //             this.setState({ loading: true });
+    //             const galleryImages = await fetchImages(this.state.q);
         
-                this.setState({ images: galleryImages })
-                this.setState({ loading: false });
-            } catch (error) {
+    //             this.setState({ images: galleryImages })
+    //             this.setState({ loading: false });
+    //         } catch (error) {
        
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
 
     render() {
         return (
@@ -47,10 +44,10 @@ export class Searchbar extends Component {
     </button>
 
             <input
-                defaultValue={this.state.q} 
-                onChange = {this.handlerChange}
                 type="text"
-                placeholder="Search images and photos"
+                    placeholder="Search images and photos"
+                    defaultValue={this.state.q} 
+                onChange = {this.handlerChange}
     />
   </form>
         )
