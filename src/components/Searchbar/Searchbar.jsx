@@ -12,31 +12,16 @@ export class Searchbar extends Component {
     handlerSubmit = evt => {
         evt.preventDefault();
         this.props.handelSearch(this.state.value)
-        
-        this.reset(); 
+        console.log(this.state.value)
+          this.reset();
     }
     
     reset = () => {
-        this.setState({ value:'',})
+        this.setState({ value:''})
     }
+    
 
-    // async componentDidUpdate(prevProps, prevState) {
-    //     if (prevState.q !== this.state.q
-    //         || prevState.page !== this.state.page) {
-    //         //запит з setState
-    //         try {
-    //             this.setState({ loading: true });
-    //             const galleryImages = await fetchImages(this.state.q);
-        
-    //             this.setState({ images: galleryImages })
-    //             this.setState({ loading: false });
-    //         } catch (error) {
-       
-    //         }
-    //     }
-    // }
-
-    render() {
+render() {
         return (
            <form onSubmit= {this.handlerSubmit}>
             <button type="submit" >

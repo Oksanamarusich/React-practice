@@ -1,4 +1,4 @@
 
-export const ButtonLoadMore = () => {
-    return <button type = "load">Load More</button>
+export const ButtonLoadMore = (onClick) => {
+    return <button type ="button" loadMore = {onClick}>Load More</button>
 }
