@@ -41,7 +41,7 @@ export class App extends Component {
             this.setState({ loading: true, error:false });
             try {
               const galleryImages = await fetchImages(this.state.searchText, this.state.page);
-             
+             toast.success("Hooray! We found the pictures!")
           
                  console.log('AFTER API', galleryImages, this.state.page)
               // this.setState({ images: galleryImages.hits })
