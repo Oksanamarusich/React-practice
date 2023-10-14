@@ -3,7 +3,7 @@ import { Searchbar } from "./Searchbar/Searchbar";
 import { ImageGallery } from "./ImageGallery/ImageGallery";
 import {ButtonLoadMore} from "./ButtonLoadMore/ButtonLoadMore"
 import { Layout } from "./Layout";
-import { fetchImages } from 'services/api';
+import { fetchImages } from 'components/services/api';
 import { RotatingLines } from 'react-loader-spinner';
 import { ErrorMessage } from 'components/ErrorMessage.styled';
 import toast, { Toaster } from 'react-hot-toast';
