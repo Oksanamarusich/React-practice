@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { BiSearch } from "react-icons/bi";
-import { Search, Button,Input } from "./Searchbar.styled";
+import { Search, Button, Input } from "./Searchbar.styled";
+import toast from 'react-hot-toast';
 
 export class Searchbar extends Component {
     state = {
@@ -13,13 +14,18 @@ export class Searchbar extends Component {
     
     handlerSubmit = evt => {
         evt.preventDefault();
-        this.props.handelSearch(this.state.value)
-        console.log(this.state.value)
-          this.reset();
+         if (this.state.value.trim() === '') {
+    return  toast.success('Please enter a search word.', {position:'top-right'});
+        };
+
+        this.props.handelSearch(this.state.value);
+         
+       this.reset();
+        
     }
     
     reset = () => {
-        this.setState({ value:''})
+        this.setState({ value: '' });
     }
     
 
@@ -31,7 +37,7 @@ render() {
             <Input
                 type="text"
                     placeholder="Search images and photos"
-                    defaultValue={this.state.q} 
+                    value={this.state.q} 
                 onChange = {this.handlerChange}
     />
   </Search>

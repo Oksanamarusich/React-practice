@@ -26,11 +26,6 @@ display: inline-block;
   height: 31px;
   border: 0;
   margin-right: 1px;
-  /* background-size: 40%;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.6;
-  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1); */
   cursor: pointer;
   outline: none;
  
@@ -43,6 +38,6 @@ export const Input = styled.input`
   font-size: 20px;
   border: none;
   outline: none;
- padding: 4px ;
+  padding: 4px ;
   padding-left: 10px;
-`
+`;

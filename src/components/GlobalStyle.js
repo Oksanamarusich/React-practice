@@ -28,11 +28,15 @@ body {
 
 img {
   display: block;
-  max-width: 100%;
-  height: auto;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
 }
 
 ul{
+  margin:0;
+  padding:0;
   list-style:none;
 }
 
