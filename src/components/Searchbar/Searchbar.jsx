@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import { BiSearch } from "react-icons/bi";
+import { Search, Button,Input } from "./Searchbar.styled";
 
 export class Searchbar extends Component {
     state = {
@@ -23,18 +25,16 @@ export class Searchbar extends Component {
 
 render() {
         return (
-           <form onSubmit= {this.handlerSubmit}>
-            <button type="submit" >
-      <span >Search</span>
-    </button>
+           <Search  onSubmit= {this.handlerSubmit}>
+            <Button type="submit"><BiSearch size = "18px"/></Button>
 
-            <input
+            <Input
                 type="text"
                     placeholder="Search images and photos"
                     defaultValue={this.state.q} 
                 onChange = {this.handlerChange}
     />
-  </form>
+  </Search>
         )
     }
 }

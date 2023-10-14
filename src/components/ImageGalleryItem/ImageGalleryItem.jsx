@@ -1,7 +1,8 @@
 import Modal from 'react-modal';
 import { Component } from 'react';
 //import { Overlay, ContainerImg } from "../Modal/Modal.styled"
-import "../Modal/Modal.css"
+import "../Modal/Modal.css";
+import { GalleryItem } from "./ImageGalleryItem.styled";
 
 
 // const customStyles = {
@@ -33,7 +34,7 @@ export class ImageGalleryItem extends Component {
       render() {
             const { isModalOpen } = this.state;
             const { id, picture, picturemodal, alt } = this.props;
-            return (<div>
+            return (<GalleryItem >
                   <li key = {id}>
                         <img src={picture} alt={alt} onClick={this.openModal} />
                   </li>
@@ -49,13 +50,12 @@ export class ImageGalleryItem extends Component {
              
                   >
                         <div>
-                              <div>
-                                   <img src={picturemodal} alt={alt} />
-                              </div>
+                            <img className ="modal-picture" src={picturemodal} alt={alt} />
                         </div>
                         
+                        
                   </Modal>
-            </div>)
+            </GalleryItem>)
 
       }
 }

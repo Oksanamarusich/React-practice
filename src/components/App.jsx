@@ -7,7 +7,7 @@ import { fetchImages } from 'services/api';
 import { RotatingLines } from 'react-loader-spinner';
 import { ErrorMessage } from 'components/ErrorMessage.styled';
 import toast, { Toaster } from 'react-hot-toast';
-//import {Modal} from "../components/Modal"
+
 
 
 export class App extends Component {
@@ -21,32 +21,35 @@ export class App extends Component {
     
   }
   
-
-  handelSearch = (searchText) => {
+ handelSearch = (searchText) => {
     this.setState({ searchText, page:1, images:[] }) //зберігаю термін пошуку
-    
+     
   }
 
   handlerLoadMore = ({ page }) => {
-    //console.log('PAGE', this.state.page)
+    console.log('CLICK')
+    console.log('PAGE', this.state.page)
     this.setState(prevState => ({page: prevState.page + 1}))
-    //console.log(this.state.page)
+    console.log('after setState handker', this.state.page)
   }
 
   async componentDidUpdate(prevProps, prevState) {
-    console.log('this.props:>>', this.state.searchText)
-    console.log('this.props:>>', this.state.page)
+    console.log('this.props didMount:>>', this.state.searchText)
+    console.log('this.props didMount:>>', this.state.page)
     if (prevState.searchText !== this.state.searchText
     || prevState.page !== this.state.page) {
             this.setState({ loading: true, error:false });
             try {
               const galleryImages = await fetchImages(this.state.searchText, this.state.page);
-              toast.success("We found the pictures!")
+             
           
-                 console.log('AFTER API', galleryImages)
-              this.setState({ images: galleryImages })
-              
-              console.log('after setsTATE', this.state.images)
+                 console.log('AFTER API', galleryImages, this.state.page)
+              // this.setState({ images: galleryImages.hits })
+              this.setState(prevState => (
+                {
+                  images: [...prevState.images, ...galleryImages.hits]
+                }));
+             
               
             } catch (error) {
               this.setState({ error: true });
@@ -80,7 +83,7 @@ render() {
         
         
         {this.state.images.length > 0 && <ButtonLoadMore  onClick = {this.handlerLoadMore} />}
-        {/* <Modal/> */}
+       
         <Toaster />
     </Layout>
   );
