@@ -1,20 +1,22 @@
-import {Component} from "react";
+import { Component } from "react";
+import toast, { Toaster } from 'react-hot-toast';
+import { RotatingLines } from 'react-loader-spinner';
+
 import { Searchbar } from "./Searchbar/Searchbar";
 import { ImageGallery } from "./ImageGallery/ImageGallery";
 import {ButtonLoadMore} from "./ButtonLoadMore/ButtonLoadMore"
-import { Layout } from "./Layout";
 import { fetchImages } from 'components/services/api';
-import { RotatingLines } from 'react-loader-spinner';
+
+import { Layout } from "./Layout";
 import { ErrorMessage } from 'components/ErrorMessage.styled';
-import { Toaster } from 'react-hot-toast';
 
 export class App extends Component {
   state = {
      images: [], 
-        loading: false,
-        error: false,
-    searchText: '',
-    page: 1,
+     loading: false,
+     error: false,
+     searchText: '',
+     page: 1,
 }
   
  handelSearch = (searchText) => {
@@ -36,7 +38,10 @@ export class App extends Component {
       try {
               const galleryImages = await fetchImages(this.state.searchText, this.state.page);
                 this.setState(prevState => ({images: [...prevState.images, ...galleryImages.hits]}));
-                
+               
+        if (!galleryImages.hits.length) {
+          toast.success("No more pictures. Please, try something else.", {position:'top-right'})
+        }
       } catch (error) {
                   this.setState({ error: true });
                 
@@ -52,11 +57,11 @@ render() {
         <Searchbar  handelSearch={this.handelSearch} />
         
      {this.state.loading && <RotatingLines
-            strokeColor="grey"
-            strokeWidth="5"
-            animationDuration="0.75"
-            width="96"
-            visible={true}
+           strokeColor="grey"
+           strokeWidth="5"
+           animationDuration="0.75"
+           width="96"
+           visible={true}
           />}
      {this.state.error && (
           <ErrorMessage>Whoops! Error! Please reload this page!</ErrorMessage>

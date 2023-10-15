@@ -10,6 +10,7 @@ export class Searchbar extends Component {
 
     handlerChange = evt => {
         this.setState({ value: evt.target.value });
+       
     }
     
     handlerSubmit = evt => {
@@ -20,9 +21,8 @@ export class Searchbar extends Component {
 
         this.props.handelSearch(this.state.value);
          
-       this.reset();
-        
-    }
+        this.reset();
+}
     
     reset = () => {
         this.setState({ value: '' });
@@ -37,7 +37,7 @@ render() {
             <Input
                 type="text"
                     placeholder="Search images and photos"
-                    value={this.state.q} 
+                    value={this.state.value} 
                 onChange = {this.handlerChange}
     />
   </Search>
